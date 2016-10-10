@@ -16,6 +16,62 @@
 
 $(call inherit-product-if-exists, vendor/lge/g3-common/g3-common-vendor.mk)
 
+# AOSP Apps
+PRODUCT_PACKAGES += \
+    BluetoothExt \
+    LatinIME \
+    Launcher3 \
+    LiveWallpapers \
+    LiveWallpapersPicker \
+    masquerade \
+    OTAUpdates \
+    Stk \
+    Substratum \
+    tinymix \
+    messaging \
+    CellBroadcastReceiver \
+    Exchange2
+
+# Extra tools AOSP
+PRODUCT_PACKAGES += \
+    e2fsck \
+    mke2fs \
+    tune2fs \
+    mount.exfat \
+    fsck.exfat \
+    mkfs.exfat \
+    mkfs.f2fs \
+    fsck.f2fs \
+    fibmap.f2fs \
+    mkfs.ntfs \
+    fsck.ntfs \
+    mount.ntfs
+
+# World APN list
+PRODUCT_COPY_FILES += \
+    device/lge/g3-common/apns-conf.xml:system/etc/apns-conf.xml
+
+# Enable SIP+VoIP on all targets
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
+
+# Stagefright FFMPEG plugin
+PRODUCT_PACKAGES += \
+    libffmpeg_extractor \
+    libffmpeg_omx \
+    media_codecs_ffmpeg.xml
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.sf.omx-plugin=libffmpeg_omx.so \
+    media.sf.extractor-plugin=libffmpeg_extractor.so
+
+# Telephony packages
+PRODUCT_PACKAGES += \
+    telephony-ext
+
+PRODUCT_BOOT_JARS += \
+    telephony-ext
+
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
