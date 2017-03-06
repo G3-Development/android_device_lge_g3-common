@@ -134,7 +134,7 @@ on boot
     # safety timer
     chown system system /sys/class/power_supply/battery/safety_timer_enabled
 
-    write /sys/class/leds/lcd-backlight/brightness 177
+    write /sys/class/leds/lcd-backlight/brightness 255
 
     # Assign TCP buffer thresholds to be ceiling value of technology maximums
     # Increased technology maximums should be reflected here.
