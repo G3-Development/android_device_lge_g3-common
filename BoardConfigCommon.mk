@@ -47,6 +47,16 @@ BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x0008000 --ramdisk_offset 0x2000000
 TARGET_KERNEL_SOURCE := kernel/lge/g3
 
+# Preoptdex On Boot
+ifeq ($(HOST_OS),linux)
+    ifneq ($(TARGET_BUILD_VARIANT),eng)
+        ifeq ($(WITH_DEXPREOPT),)
+            WITH_DEXPREOPT := true
+            WITH_DEXPREOPT_BOOT_IMG_ONLY ?= true
+        endif
+    endif
+endif
+
 # Audio
 AUDIO_FEATURE_ENABLED_COMPRESS_VOIP := false
 AUDIO_FEATURE_ENABLED_FLUENCE := true
