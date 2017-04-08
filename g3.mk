@@ -59,6 +59,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/lge/g3-common/bootanimation.zip:system/media/bootanimation.zip
 
+# BatteryStat apk
+PRODUCT_COPY_FILES += \
+    device/lge/g3-common/Turbo.apk:system/priv-app/Turbo.apk
+
 # Substratum Verified
 PRODUCT_PROPERTY_OVERRIDES := \
     ro.substratum.verified=true
