@@ -317,6 +317,7 @@
 
     <!-- Support in Surfaceflinger for blur layers.
          NOTE: This requires additional hardware-specific code. -->
+
 <!--    <bool name="config_uiBlurEnabled">true</bool> -->
 
     <!-- Device configuration setting the minfree tunable in the lowmemorykiller in the
@@ -368,4 +369,8 @@
         <item>"/data/dalvik-cache/arm/system@framework@boot.oat"</item>
         <item>"/data/dalvik-cache/arm/system@framework@services.jar@classes.dex"</item>
    </string-array>
+
+    <!-- Configuration to support SIM contact batch operation -->
+    <bool name="config_sim_phonebook_batch_operation">false</bool>
+
 </resources>
