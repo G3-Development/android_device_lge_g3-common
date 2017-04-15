@@ -1,1 +1,9 @@
 add_lunch_combo aosp_d855-userdebug
+add_lunch_combo aosp_d850-userdebug
+add_lunch_combo aosp_d852-userdebug
+add_lunch_combo aosp_ls990-userdebug
+add_lunch_combo aosp_g3ds-userdebug
+add_lunch_combo aosp_vs985-userdebug
+add_lunch_combo aosp_d851-userdebug
+
+
