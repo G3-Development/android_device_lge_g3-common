@@ -363,11 +363,6 @@ service btinit-sh /system/bin/sh /init.qcom.bt.sh
     class core
     user root
     oneshot
-
-service charger /sbin/charger_g3
-    class charger
-    critical
-
     disabled
 
 service cal_sensors-sh /system/bin/sh /init.sensors.sh
@@ -544,8 +539,6 @@ on charger
     wait /dev/block/platform/msm_sdcc.1/by-name/system
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system ro barrier=1
 
-# Charger
-    mount_all ./fstab.g3
     start rmt_storage
     start irsc_util
 
