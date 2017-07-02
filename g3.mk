@@ -113,14 +113,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     QuickCircle
 
-# Glove mode
-PRODUCT_PACKAGES += \
-    DeviceSettings
-
-# Gello
-PRODUCT_PACKAGES += \
-    Gello
-
 # IPv6 tethering
 PRODUCT_PACKAGES += \
     ebtables \
