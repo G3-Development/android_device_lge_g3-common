@@ -1,5 +1,6 @@
 #
 # Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2017 - The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,8 +18,6 @@
 -include vendor/lge/g3-common/BoardConfigVendor.mk
 
 LOCAL_PATH := device/lge/g3-common
-
-TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8974
@@ -42,6 +41,7 @@ BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkbootimg.mk
 BOARD_KERNEL_CMDLINE := console=none androidboot.hardware=g3 user_debug=31 msm_rtb.filter=0x0
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x0008000 --ramdisk_offset 0x2000000
@@ -76,7 +76,7 @@ BOARD_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 
 # CMHW
-BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw/
+BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/lineagehw/
 TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/tap_to_wake"
 
 # Crypto
@@ -86,9 +86,13 @@ TARGET_HW_DISK_ENCRYPTION := true
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
+SF_START_GRAPHICS_ALLOCATOR_SERVICE := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
 USE_OPENGL_RENDERER := true
+
+# HIDL
+DEVICE_MANIFEST_FILE := device/lge/g3-common/configs/manifest.xml
 
 # Keymaster
 TARGET_KEYMASTER_WAIT_FOR_QSEE := true
@@ -106,9 +110,6 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 
 # Power
 TARGET_POWERHAL_VARIANT := qcom
-
-# RIL
-BOARD_RIL_CLASS += ../../../device/lge/g3-common/ril
 
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
