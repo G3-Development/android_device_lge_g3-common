@@ -126,6 +126,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl
 
+# GloveMode
+PRODUCT_PACKAGES += \
+    GloveMode
+
 # IPv6 tethering
 PRODUCT_PACKAGES += \
     ebtables \
