@@ -134,7 +134,7 @@ on boot
     # safety timer
     chown system system /sys/class/power_supply/battery/safety_timer_enabled
 
-    write /sys/class/leds/lcd-backlight/brightness 255
+    write /sys/class/leds/lcd-backlight/brightness 177
 
     # Assign TCP buffer thresholds to be ceiling value of technology maximums
     # Increased technology maximums should be reflected here.
@@ -329,44 +329,32 @@ on post-fs-data
 # Services start here
 #
 
-service charger /sbin/healthd -c
+service charger /charger
     class charger
     critical
-    seclabel u:r:healthd:s0
+    seclabel u:r:charger:s0
 
-service qcom-c_core-sh /system/bin/sh /init.qcom.class_core.sh
-    class core
-    user root
-    oneshot
-
-service qcom-c_main-sh /system/bin/sh /init.class_main.sh
-    class main
-    user root
-    oneshot
-
-service baseband-sh /system/bin/sh /init.baseband.sh
+service baseband-sh /vendor/bin/sh /vendor/bin/init.baseband.sh
     class late_start
     user root
     seclabel u:r:qti_init_shell:s0
     oneshot
     disabled
 
-on property:vold.decrypt=trigger_restart_framework
-    start qcom-c_main-sh
-
-service hwaddrs /system/bin/hwaddrs
+service hwaddrs /vendor/bin/hwaddrs
     class core
     user root
     group bluetooth wifi
     oneshot
 
-service btinit-sh /system/bin/sh /init.qcom.bt.sh
+service btinit-sh /vendor/bin/sh /vendor/bin/init.qcom.bt.sh
     class core
     user root
+    seclabel u:r:qti_init_shell:s0
     oneshot
     disabled
 
-service cal_sensors-sh /vendor/bin/sh /init.sensors.sh
+service cal_sensors-sh /vendor/bin/sh /vendor/bin/init.sensors.sh
     class core
     user root
     seclabel u:r:qti_init_shell:s0
@@ -383,40 +371,24 @@ on property:bluetooth.hciattach=true
 on property:bluetooth.hciattach=false
     setprop bluetooth.status off
 
-service ril-daemon2 /system/bin/rild -c 2
-    class main
-    socket rild2 stream 660 root radio
-    socket rild-debug2 stream 660 radio system
-    user root
-    disabled
-    group radio cache inet misc audio sdcard_r sdcard_rw qcom_diag log net_raw
-
-service ril-daemon3 /system/bin/rild -c 3
-    class main
-    socket rild3 stream 660 root radio
-    socket rild-debug3 stream 660 radio system
-    user root
-    disabled
-    group radio cache inet misc audio sdcard_r sdcard_rw qcom_diag log net_raw
-
 # --> init.target.rc <--
-service qcamerasvr /system/bin/mm-qcamera-daemon
+service qcamerasvr /vendor/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
 
-service qseecomd /system/bin/qseecomd
+service qseecomd /vendor/bin/qseecomd
     class core
     user root
     group root
 
-service mpdecision /system/bin/mpdecision --avg_comp
+service mpdecision /vendor/bin/mpdecision --avg_comp
     class main
     user root
     group system readproc
     disabled
 
-service thermal-engine /system/bin/thermal-engine
+service thermal-engine /vendor/bin/thermal-engine
    class main
    user root
    group root
@@ -424,12 +396,12 @@ service thermal-engine /system/bin/thermal-engine
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
 
-service time_daemon /system/bin/time_daemon
+service time_daemon /vendor/bin/time_daemon
    class late_start
    user root
    group root
 
-service adsprpcd /system/bin/adsprpcd
+service adsprpcd /vendor/bin/adsprpcd
    class main
    user media
    group media
@@ -447,7 +419,7 @@ on property:init.svc.media=restarting
 on property:init.svc.servicemanager=restarting
     restart qcamerasvr
 
-service wcnss-service /system/bin/wcnss_service
+service wcnss-service /vendor/bin/wcnss_service
     class late_start
     user root
     group system wifi
@@ -461,12 +433,12 @@ service immvibed /system/bin/immvibed
 
 # --> init.qcom.rc <--
 
-service irsc_util /system/bin/irsc_util "/etc/sec_config"
+service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     class main
     user root
     oneshot
 
-service netmgrd /system/bin/netmgrd
+service netmgrd /vendor/bin/netmgrd
     class main
     user root
     group root wifi wakelock radio inet
@@ -489,7 +461,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
 
 # --> init.msm8974_core.rc <--
 
-service lge-sensor-sh /system/bin/sh /init.msm8974.sensor.sh
+service lge-sensor-sh /vendor/bin/sh /vendor/bin/init.msm8974.sensor.sh
     class core
     user root
     seclabel u:r:qti_init_shell:s0
@@ -497,23 +469,23 @@ service lge-sensor-sh /system/bin/sh /init.msm8974.sensor.sh
 
 # --> init.qcom.rc <--
 
-service qcom-sh /system/bin/sh /init.qcom.sh
+service qcom-sh /vendor/bin/sh /vendor/bin/init.qcom.sh
     class late_start
     user root
     seclabel u:r:qti_init_shell:s0
     oneshot
 
-service qmuxd /system/bin/qmuxd
+service qmuxd /vendor/bin/qmuxd
     class core
     user radio
-    group radio audio bluetooth gps qcom_diag
+    group radio audio bluetooth gps oem_2950
 
-service rmt_storage /system/bin/rmt_storage
+service rmt_storage /vendor/bin/rmt_storage
     class core
     user root
     disabled
 
-service sensors /system/bin/sensors.qcom
+service sensors /vendor/bin/sensors.qcom
     class late_start
     user root
     group root
