@@ -67,9 +67,6 @@ BOARD_USES_ALSA_AUDIO := true
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
 USE_CUSTOM_AUDIO_POLICY := 1
 
-# Binder
-TARGET_USES_64_BIT_BINDER := true
-
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 
