@@ -81,7 +81,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
     android.hardware.audio.effect@2.0-impl \
-    audiod \
     audio.primary.msm8974 \
     audio_policy.msm8974 \
     audio.a2dp.default \
@@ -190,6 +189,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/nfc/libnfc-nxp.conf:system/vendor/etc/libnfc-nxp.conf \
     $(LOCAL_PATH)/configs/nfc/nfcee_access.xml:system/vendor/etc/nfcee_access.xml
 
+# Offmode Charging
+PRODUCT_PACKAGES += \
+    charger_res_images
+
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
@@ -207,8 +210,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-impl \
-    power.msm8974
+    android.hardware.power@1.0-service-qti
 
 # Radio
 PRODUCT_PACKAGES += \
@@ -228,6 +230,10 @@ PRODUCT_PACKAGES += \
     init.class_main.sh \
     init.sensors.sh \
     ueventd.g3.rc
+
+# RenderScript HAL
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
 
 # Seccomp
 PRODUCT_COPY_FILES += \
@@ -253,9 +259,7 @@ PRODUCT_PACKAGES += \
 # Wifi
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
-    wificond \
     hostapd \
-    hostapd_default.conf \
     libwpa_client \
     wpa_supplicant \
     wpa_supplicant.conf
